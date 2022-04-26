@@ -1,4 +1,4 @@
-package presentation.compose
+package presentation.jbCompose
 
 import androidx.compose.runtime.*
 import domain.vo.ChoiceVO

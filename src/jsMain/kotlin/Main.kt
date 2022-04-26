@@ -1,10 +1,17 @@
+import androidx.compose.runtime.Composable
 import org.jetbrains.compose.web.renderComposable
-import presentation.compose.WineSelectorAssistant
+import org.kodein.di.compose.withDI
+import presentation.jbCompose.WineSelectorAssistant
+import config.viewDI
 
 fun main() {
-
     renderComposable(rootElementId = "root") {
-        WineSelectorAssistant()
+        App()
     }
+}
+
+@Composable
+fun App() = withDI(viewDI) {
+    WineSelectorAssistant()
 }
 

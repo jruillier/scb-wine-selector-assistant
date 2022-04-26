@@ -1,4 +1,4 @@
-package presentation.compose
+package presentation.jbCompose
 
 import androidx.compose.runtime.*
 import domain.vo.ChoiceVO
@@ -8,11 +8,13 @@ import org.jetbrains.compose.web.css.FlexWrap
 import org.jetbrains.compose.web.css.display
 import org.jetbrains.compose.web.css.flexWrap
 import org.jetbrains.compose.web.dom.Div
+import org.kodein.di.compose.localDI
+import org.kodein.di.instance
 
 @Composable
 fun ChoiceSelector(rootChoice: ChoiceVO?, onSelected: (choice: ChoiceVO) -> Unit) {
 
-    val getChoicesUC = GetChoicesUC()
+    val getChoicesUC: GetChoicesUC by localDI().instance()
 
     Div({
         style {
