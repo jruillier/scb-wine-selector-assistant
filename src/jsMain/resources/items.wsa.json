@@ -1,0 +1,12 @@
+[
+  {
+    "label": "Choix par goût",
+    "imageSrc": "https://cdn.shopify.com/s/files/1/0519/9049/5389/files/Nouveau_logo_scomb_0d11481b-eae4-46b4-9061-4913bdd29b04_600x.png?v=1630613396",
+    "children": [
+      {
+        "label": "toto",
+        "imageSrc": "toto"
+      }
+    ]
+  }
+]

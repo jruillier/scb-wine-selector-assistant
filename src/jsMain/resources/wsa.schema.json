@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aronnax.eu/wsa.schema.json",
+  "title": "Wine Selector Assistant items",
+  "description": "Items tree",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "label": {
+        "type": "string"
+      },
+      "imageSrc": {
+        "type": "string"
+      },
+      "targetHref": {
+        "type": "string"
+      },
+      "children": {
+          "$ref": "#"
+      }
+    },
+    "required": ["label", "imageSrc"]
+  }
+}
