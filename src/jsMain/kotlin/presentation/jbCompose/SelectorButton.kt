@@ -6,7 +6,7 @@ import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
 
 @Composable
-fun SelectorButton(text: String, imageSrc: String, onClick: () -> Unit) {
+fun SelectorButton(text: String, imageSrc: String?, onClick: () -> Unit) {
     Div({
         style {
             flex(1, 0, 30.percent)
@@ -17,7 +17,9 @@ fun SelectorButton(text: String, imageSrc: String, onClick: () -> Unit) {
             padding(20.px)
             textAlign("center")
 
-            backgroundImage("url('$imageSrc')")
+            if (imageSrc != null) {
+                backgroundImage("url('$imageSrc')")
+            }
             backgroundPosition("center")
             backgroundRepeat("no-repeat")
             backgroundSize("cover")

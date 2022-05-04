@@ -1,8 +1,10 @@
 package presentation.jbCompose
 
-import androidx.compose.runtime.*
-import domain.vo.ChoiceVO
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
 import domain.usecase.GetChoicesUC
+import domain.vo.ChoiceVO
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.FlexWrap
 import org.jetbrains.compose.web.css.display
@@ -15,6 +17,12 @@ import org.kodein.di.instance
 fun ChoiceSelector(rootChoice: ChoiceVO?, onSelected: (choice: ChoiceVO) -> Unit) {
 
     val getChoicesUC: GetChoicesUC by localDI().instance()
+    val availableChoices: MutableList<ChoiceVO> = mutableStateListOf()
+
+    LaunchedEffect(key1 = rootChoice, block = {
+        availableChoices.clear()
+        availableChoices.addAll(getChoicesUC.exec(rootChoice))
+    })
 
     Div({
         style {
@@ -22,7 +30,7 @@ fun ChoiceSelector(rootChoice: ChoiceVO?, onSelected: (choice: ChoiceVO) -> Unit
             flexWrap(FlexWrap.Wrap)
         }
     }) {
-        getChoicesUC.exec(rootChoice).forEach {
+        availableChoices.forEach {
             SelectorButton(it.label, it.imageSrc, onClick = {
                 onSelected.invoke(it)
             })

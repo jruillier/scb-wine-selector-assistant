@@ -2,6 +2,6 @@ package domain.dataSourcePort
 
 interface DataRepository {
 
-    fun getItemsTree(): List<StoredItemDto>
+    suspend fun getItemsTree(): List<StoredItemDto>
 
 }

@@ -6,12 +6,7 @@ import domain.vo.ChoiceVO
 
 class GetChoicesUC(private val dataRepository: DataRepository) {
 
-    companion object {
-        const val FAKE_IMG_SRC =
-            "https://cdn.shopify.com/s/files/1/0519/9049/5389/files/Nouveau_logo_scomb_0d11481b-eae4-46b4-9061-4913bdd29b04_600x.png?v=1630613396"
-    }
-
-    fun exec(rootChoice: ChoiceVO?): List<ChoiceVO> {
+    suspend fun exec(rootChoice: ChoiceVO?): List<ChoiceVO> {
 
         val allItemsTree = this.dataRepository.getItemsTree()
 
