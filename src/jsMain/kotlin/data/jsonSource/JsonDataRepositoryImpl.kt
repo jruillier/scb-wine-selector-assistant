@@ -3,19 +3,23 @@ package data.jsonSource
 import domain.configProviderPort.ConfigProviderPort
 import domain.dataSourcePort.DataRepository
 import domain.dataSourcePort.StoredItemDto
-import domain.loggerPort.LoggerFactoryPort
 import domain.loggerPort.LoggerPort
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 
-class JsonDataRepositoryImpl(loggerFactory: LoggerFactoryPort, private val configProvider: ConfigProviderPort) : DataRepository {
+class JsonDataRepositoryImpl(val logger:LoggerPort, private val configProvider: ConfigProviderPort) : DataRepository {
 
-    val logger:LoggerPort = loggerFactory.getLogger(this::class)
+    private var previousItems: List<StoredItemDto>? = null
+
     override suspend fun getItemsTree(): List<StoredItemDto> {
+        if (this.previousItems != null) {
+            return this.previousItems!!
+        }
+
         val jsonUrl = configProvider.getStringConfig("json-url")!!
 
-        this.logger.info("SCB Loading JSON from: $jsonUrl")
+        this.logger.info("Loading items JSON from: $jsonUrl")
 
         val client = HttpClient() {
             install(JsonFeature)
@@ -24,7 +28,8 @@ class JsonDataRepositoryImpl(loggerFactory: LoggerFactoryPort, private val confi
 
         this.logger.debug(items.toString())
 
-        return items.map { toDomainDto(it) }
+        this.previousItems = items.map { toDomainDto(it) }
+        return this.previousItems!!
     }
 
     private fun toDomainDto(dataDto: StoredItemDataDto): StoredItemDto =

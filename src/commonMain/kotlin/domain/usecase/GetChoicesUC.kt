@@ -11,7 +11,7 @@ class GetChoicesUC(private val loggerFactory: LoggerFactoryPort,private val data
 
     suspend fun exec(rootChoice: ChoiceVO?): List<ChoiceVO> {
 
-        logger.info("SCB Selected: " + rootChoice?.label)
+        logger.info("Selected choice: " + rootChoice?.label)
 
         val allItemsTree = this.dataRepository.getItemsTree()
 
