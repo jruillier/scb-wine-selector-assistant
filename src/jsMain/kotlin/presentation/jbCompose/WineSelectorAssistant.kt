@@ -2,16 +2,19 @@ package presentation.jbCompose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
+import domain.configProviderPort.ConfigProviderPort
 import domain.vo.ChoiceVO
-import kotlinx.browser.document
 import kotlinx.browser.window
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.H1
 import org.jetbrains.compose.web.dom.Text
+import org.kodein.di.compose.localDI
+import org.kodein.di.instance
 
 @Composable
 fun WineSelectorAssistant() {
 
+    val configProvider: ConfigProviderPort by localDI().instance()
     val selectedChoices: MutableList<ChoiceVO> = mutableStateListOf()
 
     Div({
@@ -23,8 +26,7 @@ fun WineSelectorAssistant() {
             classes("opposing-items")
         }) {
             H1({ classes("section-heading", "left") }) {
-                //TODO JR use domainPort here
-                document.getElementById("wine-selector")?.getAttribute("data-title")?.let {
+                configProvider.getStringConfig("title")?.let {
                     Text(it)
                 }
             }
