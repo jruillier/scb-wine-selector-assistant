@@ -12,4 +12,8 @@ class ConfigProviderWebImpl : ConfigProviderPort {
             .getElementById(this.rootElementId)!!
             .getAttribute("data-$key")
     }
+
+    override fun getBooleanConfig(key: String): Boolean {
+        return this.getStringConfig(key).toBoolean()
+    }
 }
