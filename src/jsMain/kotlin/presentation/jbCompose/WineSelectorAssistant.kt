@@ -1,10 +1,13 @@
 package presentation.jbCompose
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
 import domain.vo.ChoiceVO
+import kotlinx.browser.document
 import kotlinx.browser.window
-import org.jetbrains.compose.web.css.*
-import org.jetbrains.compose.web.dom.*
+import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.H1
+import org.jetbrains.compose.web.dom.Text
 
 @Composable
 fun WineSelectorAssistant() {
@@ -13,15 +16,22 @@ fun WineSelectorAssistant() {
 
     Div({
         style {
-            border(1.px, LineStyle.Solid, Color.black)
-            padding(5.px)
         }
     }) {
 
-        H3 { Text("Aidez moi à choisir mon vin...") }
-        BreadCrumb(selectedChoices)
+        Div({
+            classes("opposing-items")
+        }) {
+            H1({ classes("section-heading", "left") }) {
+                //TODO JR use domainPort here
+                document.getElementById("wine-selector")?.getAttribute("data-title")?.let {
+                    Text(it)
+                }
+            }
+            BreadCrumb(selectedChoices)
+        }
 
-        ChoiceSelector(selectedChoices.lastOrNull(), onSelected = {selectedChoice->
+        ChoiceSelector(selectedChoices.lastOrNull(), onSelected = { selectedChoice ->
             if (selectedChoice.targetHref != null) {
                 window.location.href = selectedChoice.targetHref
                 return@ChoiceSelector

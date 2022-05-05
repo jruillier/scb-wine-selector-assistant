@@ -8,6 +8,8 @@ class GetChoicesUC(private val dataRepository: DataRepository) {
 
     suspend fun exec(rootChoice: ChoiceVO?): List<ChoiceVO> {
 
+        console.log("SCB Selected: " + rootChoice?.label)
+
         val allItemsTree = this.dataRepository.getItemsTree()
 
         if (rootChoice == null) {

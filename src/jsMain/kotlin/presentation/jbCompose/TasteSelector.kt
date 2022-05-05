@@ -1,14 +1,9 @@
 package presentation.jbCompose
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.*
 import domain.usecase.GetChoicesUC
 import domain.vo.ChoiceVO
-import org.jetbrains.compose.web.css.DisplayStyle
-import org.jetbrains.compose.web.css.FlexWrap
-import org.jetbrains.compose.web.css.display
-import org.jetbrains.compose.web.css.flexWrap
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Div
 import org.kodein.di.compose.localDI
 import org.kodein.di.instance
@@ -17,17 +12,18 @@ import org.kodein.di.instance
 fun ChoiceSelector(rootChoice: ChoiceVO?, onSelected: (choice: ChoiceVO) -> Unit) {
 
     val getChoicesUC: GetChoicesUC by localDI().instance()
-    val availableChoices: MutableList<ChoiceVO> = mutableStateListOf()
+    var availableChoices: List<ChoiceVO> by remember { mutableStateOf(listOf()) }
 
     LaunchedEffect(key1 = rootChoice, block = {
-        availableChoices.clear()
-        availableChoices.addAll(getChoicesUC.exec(rootChoice))
+        availableChoices = getChoicesUC.exec(rootChoice)
     })
 
     Div({
         style {
             display(DisplayStyle.Flex)
             flexWrap(FlexWrap.Wrap)
+            justifyContent(JustifyContent.SpaceEvenly)
+            gap(10.px)
         }
     }) {
         availableChoices.forEach {
