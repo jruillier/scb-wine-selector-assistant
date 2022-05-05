@@ -11,15 +11,15 @@
         "type": "string"
       },
       "imageSrc": {
-        "type": "string"
+        "type": ["string","null"]
       },
       "targetHref": {
-        "type": "string"
+        "type": ["string","null"]
       },
       "children": {
           "$ref": "#"
       }
     },
-    "required": ["label", "imageSrc"]
+    "required": ["label"]
   }
 }
