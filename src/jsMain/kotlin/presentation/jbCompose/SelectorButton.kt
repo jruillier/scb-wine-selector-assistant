@@ -5,7 +5,7 @@ import domain.configProviderPort.ConfigProviderPort
 import kotlinx.browser.window
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
-import org.jetbrains.compose.web.dom.Span
+import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Text
 import org.kodein.di.compose.localDI
 import org.kodein.di.instance
@@ -40,7 +40,7 @@ fun SelectorButton(text: String, imageSrc: String?, onClick: () -> Unit) {
             onClick.invoke()
         }
     }) {
-        Span({
+        Div({
             style {
                 if (updatedImageSrc != null) {
                     padding(10.px)
