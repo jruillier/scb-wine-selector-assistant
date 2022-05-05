@@ -2,13 +2,16 @@ package domain.usecase
 
 import domain.dataSourcePort.DataRepository
 import domain.dataSourcePort.StoredItemDto
+import domain.loggerPort.LoggerFactoryPort
 import domain.vo.ChoiceVO
 
-class GetChoicesUC(private val dataRepository: DataRepository) {
+class GetChoicesUC(private val loggerFactory: LoggerFactoryPort,private val dataRepository: DataRepository) {
+
+    private val logger = this.loggerFactory.getLogger("GetChoicesUC")
 
     suspend fun exec(rootChoice: ChoiceVO?): List<ChoiceVO> {
 
-        console.log("SCB Selected: " + rootChoice?.label)
+        logger.info("SCB Selected: " + rootChoice?.label)
 
         val allItemsTree = this.dataRepository.getItemsTree()
 

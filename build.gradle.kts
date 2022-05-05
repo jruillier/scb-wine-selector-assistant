@@ -36,6 +36,8 @@ kotlin {
         binaries.executable()
     }
     sourceSets {
+        val commonMain by getting {
+        }
         val jsMain by getting {
             dependencies {
                 implementation(compose.web.core)
@@ -44,6 +46,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:$ktor_version")
                 implementation("io.ktor:ktor-client-js:$ktor_version")
                 implementation("io.ktor:ktor-client-serialization:$ktor_version")
+                implementation("io.github.microutils:kotlin-logging:2.1.21")
             }
         }
         val jsTest by getting {
