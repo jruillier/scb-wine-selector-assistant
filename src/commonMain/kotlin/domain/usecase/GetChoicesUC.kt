@@ -7,7 +7,7 @@ import domain.vo.ChoiceVO
 
 class GetChoicesUC(private val loggerFactory: LoggerFactoryPort,private val dataRepository: DataRepository) {
 
-    private val logger = this.loggerFactory.getLogger("GetChoicesUC")
+    private val logger = this.loggerFactory.getLogger(this::class)
 
     suspend fun exec(rootChoice: ChoiceVO?): List<ChoiceVO> {
 

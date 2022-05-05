@@ -20,7 +20,7 @@ val appDI = DI {
     bindSingleton { GetChoicesUC(instance(), instance()) }
 
     // Json Source Repository
-    bindSingleton<DataRepository> { JsonDataRepositoryImpl(instance()) }
+    bindSingleton<DataRepository> { JsonDataRepositoryImpl(instance(), instance()) }
 
     // Logging
     bindSingleton<LoggerFactoryPort> { LoggerFactoryKLImpl() }
